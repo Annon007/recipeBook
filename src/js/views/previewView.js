@@ -1,4 +1,4 @@
-import icons from '../../img/icons.svg';
+import icons from 'urL:../../img/icons.svg';
 
 import View from "./View";
 
