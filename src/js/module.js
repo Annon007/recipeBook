@@ -92,7 +92,7 @@ export const deleteBookMark=function(id){
 const init=function(){
   const storage=localStorage.getItem("bookmark");
   if(storage) state.bookMark=JSON.parse(storage);
-  console.log(state.bookMark)
+  // console.log(state.bookMark)
 }
 init()
 // https://forkify-api.herokuapp.com/api/v2/recipes?search=pizza
