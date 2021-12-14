@@ -23,17 +23,16 @@ const conrollRecipe = async function () {
     if (!id) return;
     recipeView.renderSpinner();
     resultsView.update(modal.getSearchResultPage());
-    bookmarksView.update(modal.state.bookMark)
+    bookmarksView.update(modal.state.bookMark);
 
     await modal.loadRecipe(id);
 
     const { recipe } = modal.state;
     recipeView.render(recipe);
     // controllServings()
-
   } catch (err) {
     // alert(err);
-    recipeView.renderError()
+    recipeView.renderError();
   }
 };
 // conrollRecipe();
@@ -42,69 +41,65 @@ const conrollRecipe = async function () {
 
 const controllSearchResults = async function () {
   try {
-    resultsView.renderSpinner()
-    const query = searchView.getQuery()
+    resultsView.renderSpinner();
+    const query = searchView.getQuery();
     if (!query) return;
-    await modal.loadSearchRecipe(query)
+    await modal.loadSearchRecipe(query);
     // console.log(modal.state.search.results)
     resultsView.render(modal.getSearchResultPage(1));
     paginationView.render(modal.state.search);
   } catch (err) {
-    recipeView.renderError(err)
-
+    recipeView.renderError(err);
   }
-}
-const controllPagination=function(goToPage){
+};
+const controllPagination = function (goToPage) {
   resultsView.render(modal.getSearchResultPage(goToPage));
   paginationView.render(modal.state.search);
-}
-const controllServings=function(newServings){
+};
+const controllServings = function (newServings) {
   modal.updateServings(newServings);
   // recipeView.render(modal.state.recipe)
-  recipeView.update(modal.state.recipe)
-
-}
-const controllBookMark=function(){
+  recipeView.update(modal.state.recipe);
+};
+const controllBookMark = function () {
   // console.log(!modal.state.bookMarked)
-  if(!modal.state.recipe.bookMarked) modal.addBookMark(modal.state.recipe)
-  else modal.deleteBookMark(modal.state.recipe.id)
+  if (!modal.state.recipe.bookMarked) modal.addBookMark(modal.state.recipe);
+  else modal.deleteBookMark(modal.state.recipe.id);
   // console.log("Clicked",modal.state.recipe)
-  recipeView.update(modal.state.recipe)
+  recipeView.update(modal.state.recipe);
 
-  bookmarksView.render(modal.state.bookMark)
-}
-const controllBoorkMarkRender=function(){
   bookmarksView.render(modal.state.bookMark);
-}
-const controllAddRecipe=async function(newRecipe){
-  try{
+};
+const controllBoorkMarkRender = function () {
+  bookmarksView.render(modal.state.bookMark);
+};
+const controllAddRecipe = async function (newRecipe) {
+  try {
     console.log(newRecipe);
 
-  await modal.uploadRecipe(newRecipe);
-  recipeView.render(modal.state.recipe)
-  bookmarksView.render(modal.state.bookMark)
-  window.history.pushState(null,"",`#${modal.state.recipe.id}`)
-  setTimeout(function(){
-    addRecipeView.renderMessage();
-  },1500)
-  addRecipeView.renderSpinner();
+    await modal.uploadRecipe(newRecipe);
+    recipeView.render(modal.state.recipe);
+    bookmarksView.render(modal.state.bookMark);
+    window.history.pushState(null, '', `#${modal.state.recipe.id}`);
 
-  setTimeout(function(){
-    addRecipeView.toggleWindow()
-  },2500)
-}catch(err){
+    addRecipeView.renderSpinner();
+
+    setTimeout(function () {
+      addRecipeView.toggleWindow();
+    }, 2500);
+  } catch (err) {
     addRecipeView.renderError(err);
-    console.error("❌",err)
+    console.error('❌', err);
   }
-}
+};
 
 const init = function () {
-  bookmarksView.addRenderHandeler(controllBoorkMarkRender)
+  bookmarksView.addRenderHandeler(controllBoorkMarkRender);
   recipeView.addHendelerRender(conrollRecipe);
   recipeView.addHandelerUpdateServings(controllServings);
   recipeView.addHandelerBookMark(controllBookMark);
   searchView.addSearchHandeler(controllSearchResults);
   paginationView.addHandelerClick(controllPagination);
   addRecipeView.addHandelerUpload(controllAddRecipe);
-}
-init()
+};
+init();
