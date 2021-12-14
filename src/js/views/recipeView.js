@@ -1,5 +1,5 @@
 import View from './View.js';
-import icons from 'url../../img/icons.svg';
+import icons from '../../img/icons.svg';
 // import fractional from '../../../node_modules/fractional';
 import { Fraction } from 'fractional';
 import { state } from '../module.js';
