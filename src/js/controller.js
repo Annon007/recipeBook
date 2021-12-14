@@ -81,7 +81,9 @@ const controllAddRecipe = async function (newRecipe) {
     recipeView.render(modal.state.recipe);
     bookmarksView.render(modal.state.bookMark);
     window.history.pushState(null, '', `#${modal.state.recipe.id}`);
-
+    setTimeout(function () {
+      addRecipeView.renderMessage();
+    }, 1500);
     addRecipeView.renderSpinner();
 
     setTimeout(function () {
