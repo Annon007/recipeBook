@@ -1,6 +1,6 @@
 import View from './View.js';
 import icons from '../../img/icons.svg';
-import Fraction from '../../../node_modules/fractional';
+// import Fraction from '../../../node_modules/fractional';
 // import { Fraction } from 'fractional';
 import { state } from '../module.js';
 
@@ -109,7 +109,7 @@ class RecipeView extends View {
               <use href="${icons}#icon-check"></use>
             </svg>
             <div class="recipe__quantity">${
-              ing?.quantity ? new Fraction(ing?.quantity ?? '').toString() : ''
+              ing?.quantity ? ing?.quantity : ''
             }</div>
 
             <div class="recipe__description">
