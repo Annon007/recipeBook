@@ -1,4 +1,4 @@
-import View from './view.js';
+import View from './View.js';
 import icons from '../../img/icons.svg';
 import Fraction from '../../../node_modules/fractional';
 // import { Fraction } from 'fractional';
